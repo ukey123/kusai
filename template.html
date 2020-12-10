@@ -8,7 +8,7 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Date', 'Kusai'],
+          ['Date', 'iinioi'],
         {% for record in kusai_list %}
           ['{{record.date}}',  {{record.kusai}}],
         {% endfor %}
