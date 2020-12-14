@@ -1,0 +1,2 @@
+2020-12-11 14:39:37: (server.c.1464) server started (lighttpd/1.4.53) 
+2020-12-11 14:53:50: (server.c.2059) server stopped by UID = 0 PID = 1 
