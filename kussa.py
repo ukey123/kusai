@@ -11,7 +11,7 @@ import sqlite3
 threshold = 100 #閾値を変えるときはここを変更
 
 pygame.mixer.init()
-pygame.mixer.music.load("/home/pi/Desktop/kusai.mp3") #mp3データを変えるときはここを変更
+pygame.mixer.music.load("/home/pi/Desktop/kusai/kusai.mp3") #mp3データを変えるときはここを変更
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17,GPIO.OUT)

@@ -20,8 +20,8 @@ def mychart(environ, start_response):
   connection.isolation_level = None
   cursor = connection.cursor()
  
-  sql = "select * from kusai "
-  #sql = "select * from kusai where strftime('%s',datetime(t, '+24 hours')) > datetime('now')"
+  sql = "select strftime('%s' , t), v from kusai"
+  #sql = "select strftime('%s' , t), v from kusai where t > datetime('now', '-24 hours')"
   cursor.execute(sql)
   records = cursor.fetchall()
   for record in records:
@@ -34,7 +34,7 @@ def mychart(environ, start_response):
   title = u"Kusai Chart"
  
   #テンプレートへの挿入
-  html = tpl.render({'title':title, 'temp_list':temp_list})
+  html = tpl.render({'title':title, 'kusai_list':temp_list})
  
   start_response('200 OK', [('Content-Type', 'text/html')])
   return [html.encode('utf-8')]
