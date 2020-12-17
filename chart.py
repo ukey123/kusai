@@ -11,7 +11,7 @@ def mychart(environ, start_response):
   tpl = env.get_template('template.html')
  
   #テンプレートへ挿入するデータの作成
-  title = u"Kusai Chart"
+  title = u"臭いチャート"
  
   temp_list = []
  
@@ -20,18 +20,18 @@ def mychart(environ, start_response):
   connection.isolation_level = None
   cursor = connection.cursor()
  
-  sql = "select strftime('%s' , t), v from kusai"
+  sql = "select t, v from kusai"
   #sql = "select strftime('%s' , t), v from kusai where t > datetime('now', '-24 hours')"
   cursor.execute(sql)
   records = cursor.fetchall()
   for record in records:
-    temp_list.append({'date':record[0], 'kusai':record[1]})
+      temp_list.append({'date':record[0].replace('-',',').replace(' ',',').replace(':',','), 'kusai':record[1]})
     #temp_list.append({'date':record[0].strftime("%Y-%m-%d %H:%M"), 'kusai':record[1]})
   cursor.close()
   connection.close()
  
   #テンプレートへ挿入するデータの作成
-  title = u"Kusai Chart"
+  title = u"臭いチャート"
  
   #テンプレートへの挿入
   html = tpl.render({'title':title, 'kusai_list':temp_list})
