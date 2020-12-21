@@ -8,6 +8,15 @@ import time
 import datetime
 import sqlite3
 
+dbpath = 'logging'
+connection = sqlite3.connect(dbpath)
+connection.isolation_level = None
+cursor = connection.cursor()
+sql = "CREATE TABLE IF NOT EXISTS kusai (t TIMESTAMP, v INT)"
+cursor.execute(sql)
+connection.commit()
+connection.close()
+
 threshold = 100 #閾値を変えるときはここを変更
 
 pygame.mixer.init()
@@ -61,7 +70,7 @@ try:
            connection = sqlite3.connect(dbpath)
            connection.isolation_level = None
            cursor = connection.cursor()
-           sql = "insert into kusai (t,v)VALUES(datetime('now', 'localtime'),'%s')"%Val
+           sql = "insert into kusai (t,v)VALUES(datetime('now'),'%s')"%Val
            cursor.execute(sql)
            connection.commit()
            connection.close()
