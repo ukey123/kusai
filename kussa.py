@@ -17,7 +17,7 @@ cursor.execute(sql)
 connection.commit()
 connection.close()
 
-threshold = 100 #閾値を変えるときはここを変更
+threshold = 500 #閾値を変えるときはここを変更
 
 pygame.mixer.init()
 pygame.mixer.music.load("/home/pi/Desktop/kusai/kusai.mp3") #mp3データを変えるときはここを変更
@@ -49,31 +49,33 @@ def measure(ch):
 
 try:
     while 1:
-        time.sleep(0.237)
+        time.sleep(0.948)
 
         GPIO.output(22,True)
-        time.sleep(0.003)
+        time.sleep(0.012)
 
         ch0_val = measure(ch0)
         Val = 1023 - ch0_val
-        time.sleep(0.002)
+        time.sleep(0.008)
         GPIO.output(22,False)
         
         GPIO.output(17,True)
-        time.sleep(0.008)
+        time.sleep(0.032)
         GPIO.output(17,False)
 
         print(Val)
+
+        dbpath = 'logging'
+        connection = sqlite3.connect(dbpath)
+        connection.isolation_level = None
+        cursor = connection.cursor()
+        sql = "insert into kusai (t,v)VALUES(datetime('now'),'%s')"%Val
+        cursor.execute(sql)
+        connection.commit()
+        connection.close()
+
         if Val > threshold:
            pygame.mixer.music.play(0)
-           dbpath = 'logging'
-           connection = sqlite3.connect(dbpath)
-           connection.isolation_level = None
-           cursor = connection.cursor()
-           sql = "insert into kusai (t,v)VALUES(datetime('now'),'%s')"%Val
-           cursor.execute(sql)
-           connection.commit()
-           connection.close()
 
 except KeyboardInterrupt:
     pass
