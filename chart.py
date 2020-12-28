@@ -20,7 +20,7 @@ def mychart(environ, start_response):
   connection.isolation_level = None
   cursor = connection.cursor()
  
-  sql = "select datetime(t, 'localtime'), v from kusai"
+  sql = "select datetime(t, 'localtime', '-1 months'), v from kusai"
   #sql = "select strftime('%s' , t), v from kusai where t > datetime('now', '-24 hours')"
   cursor.execute(sql)
   records = cursor.fetchall()

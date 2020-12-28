@@ -18,14 +18,15 @@
  
         //グラフの日時表示を24時間表記に変える処理その1
         hAxis: {
-        format: 'HH:mm'
+        format: 'MM/dd\nHH:mm'
          },
 
 　　　　　  title: '{{title}}' 
         };
         
-         // グラフの日時表示を24時間表記に変える処理その2
-         var dateFormatter = new google.visualization.DateFormat({pattern: 'HH:mm'});
+         // グラフの日時表示を24時間表記に変える処理その2
+
+         var dateFormatter = new google.visualization.DateFormat({pattern: 'MM/dd\nHH:mm'});
          dateFormatter.format(data, 0);
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
