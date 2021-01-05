@@ -25,13 +25,14 @@
         };
         
          // グラフの日時表示を24時間表記に変える処理その2
-
          var dateFormatter = new google.visualization.DateFormat({pattern: 'MM/dd\nHH:mm'});
          dateFormatter.format(data, 0);
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+        //グラフアプリの表示を1分ごとに更新する処理
+        setTimeout("location.reload()",1000*60);
     </script>
   </head>
   <body>

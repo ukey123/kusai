@@ -49,18 +49,18 @@ def measure(ch):
 
 try:
     while 1:
-        time.sleep(56.88)
+        time.sleep(5.688)
 
         GPIO.output(22,True)
-        time.sleep(0.72)
+        time.sleep(0.072)
 
         ch0_val = measure(ch0)
         Val = 1023 - ch0_val
-        time.sleep(0.48)
+        time.sleep(0.048)
         GPIO.output(22,False)
         
         GPIO.output(17,True)
-        time.sleep(1.92)
+        time.sleep(0.192)
         GPIO.output(17,False)
 
         print(Val)
@@ -69,7 +69,7 @@ try:
         connection = sqlite3.connect(dbpath)
         connection.isolation_level = None
         cursor = connection.cursor()
-        sql = "insert into kusai (t,v)VALUES(datetime('now'), %s)"%Val
+        sql = "insert into kusai (t,v)VALUES(datetime('now'),'%s')"%Val
         cursor.execute(sql)
         connection.commit()
         connection.close()
